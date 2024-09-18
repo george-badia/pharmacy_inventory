@@ -50,3 +50,23 @@ for _ in range(20):
     quantity = random.randint(10, 30)  
     date_issued = generate_random_date(from_date, to_date)
 
+# Select a random instruction
+    instruction = random.choice(instructions)
+
+    # Create a new prescription
+    prescription = Prescription(
+        customer_id=customer_id,
+        medication_id=medication_id,
+        quantity=quantity,
+        date_issued=date_issued,
+        instruction=instruction  
+    )
+
+    # Add the prescription to the session
+    session.add(prescription)
+
+# Commit the changes to the database
+session.commit()
+
+print(f"Successfully created {len(session.query(Prescription).all())} prescriptions!")
+
