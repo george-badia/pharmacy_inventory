@@ -38,7 +38,8 @@ class Medication(Base):
     prescriptions = relationship('Prescription', back_populates='medication')
 
     def __repr__(self):
-        return f'<Medication:(id={self.id}, name="{self.name}")>'
+        return f"<Medication(name={self.name}, quantity={self.quantity}, price={self.price})>"
+
     
     #add class methods for CRUD functionality
     @classmethod
@@ -80,6 +81,28 @@ class Prescription(Base):
 
     def __repr__(self):
         return f"<Prescription:(customer_id={self.customer_id}, medication_id={self.medication_id}, quantity={self.quantity}, date_issued={self.date_issued} instruction={self.instruction})>"
+    
+     #Add class methods to perform Crud functionality    
+    @classmethod
+    def create(cls, session, customer_id, medication_id, quantity, date_issued):
+        new_prescription = cls(customer_id=customer_id, medication_id=medication_id, quantity=quantity, date_issued=date_issued)
+        session.add(new_prescription)
+        session.commit()
+
+    @classmethod
+    def delete(cls, session, prescription_id):
+        prescription = session.query(cls).get(prescription_id)
+        if prescription:
+            session.delete(prescription)
+            session.commit()
+
+    @classmethod
+    def get_all(cls, session):
+        return session.query(cls).all()
+
+    @classmethod
+    def find_by_id(cls, session, prescription_id):
+        return session.query(cls).get(prescription_id)
 
 #User model
 class User(Base):
