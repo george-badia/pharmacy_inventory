@@ -37,9 +37,30 @@ class Medication(Base):
    #Add relationship to medication
     prescriptions = relationship('Prescription', back_populates='medication')
 
-
     def __repr__(self):
         return f'<Medication:(id={self.id}, name="{self.name}")>'
+    
+    #add class methods for CRUD functionality
+    @classmethod
+    def create(cls, session, name, description, quantity, price):
+        new_medication = cls(name=name, description=description, quantity=quantity, price=price)
+        session.add(new_medication)
+        session.commit()
+
+    @classmethod
+    def delete(cls, session, medication_id):
+        medication = session.query(cls).get(medication_id)
+        if medication:
+            session.delete(medication)
+            session.commit()
+
+    @classmethod
+    def get_all(cls, session):
+        return session.query(cls).all()
+
+    @classmethod
+    def find_by_id(cls, session, medication_id):
+        return session.query(cls).get(medication_id)
 
 
 #  Prescription Model
