@@ -40,3 +40,23 @@ class Medication(Base):
 
     def __repr__(self):
         return f'<Medication:(id={self.id}, name="{self.name}")>'
+
+
+#  Prescription Model
+class Prescription(Base):
+    __tablename__ = 'prescription'
+    
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    customer_id = Column(Integer, ForeignKey('customers.id'), nullable=False)
+    medication_id = Column(Integer, ForeignKey('medication.id'), nullable=False) 
+    quantity = Column(Integer, nullable=False)
+    date_issued = Column(Date, nullable=False)
+    instruction = Column(String, nullable=False)
+
+    #add relationship to customer and medication
+    customer = relationship('Customer', back_populates='prescriptions')
+    medication = relationship('Medication', back_populates='prescriptions')
+
+    def __repr__(self):
+        return f"<Prescription:(customer_id={self.customer_id}, medication_id={self.medication_id}, quantity={self.quantity}, date_issued={self.date_issued} instruction={self.instruction})>"
+
