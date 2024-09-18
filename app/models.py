@@ -72,5 +72,14 @@ class User(Base):
     def __repr__(self):
         return f"<User:(username={self.username}, password={self.password})>"
 
+# Create an SQLite database engine
+engine = create_engine('sqlite:///app/pharmacy.db')
+
+# Create the database schema (all tables)
+Base.metadata.create_all(engine)
+
+# Create a session factory bound to the engine
+Session = sessionmaker(bind=engine)
+session = Session()
 
              
