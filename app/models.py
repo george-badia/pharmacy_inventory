@@ -24,3 +24,19 @@ class Customer(Base):
     def __repr__(self):
         return f"<Customer:(name={self.name}, phone={self.phone}, email={self.email})>"
 
+#  Medication Model
+class Medication(Base):
+    __tablename__ = 'medication'
+    
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    name = Column(String, nullable=False)
+    description = Column(String, nullable=True)
+    quantity = Column(Integer, nullable=False)
+    price = Column(Float, nullable=False)
+
+   #Add relationship to medication
+    prescriptions = relationship('Prescription', back_populates='medication')
+
+
+    def __repr__(self):
+        return f'<Medication:(id={self.id}, name="{self.name}")>'
