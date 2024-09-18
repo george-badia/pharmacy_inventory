@@ -31,3 +31,10 @@ medication_names = [
     "Insulin", "Albuterol", "Salbutamol", "Prednisolone", "Levothyroxine",
     "Simvastatin", "Atenolol", "Losartan", "Enalapril", "Amlodipine"
 ]
+
+# Shuffle the medication names to randomize the order
+fake.random.shuffle(medication_names)
+
+# Define a function to generate a random price
+def generate_price(min_price=10.0, max_price=50.0):
+    return round(fake.random.uniform(min_price, max_price), 2)
