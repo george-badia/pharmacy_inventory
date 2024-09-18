@@ -38,3 +38,26 @@ fake.random.shuffle(medication_names)
 # Define a function to generate a random price
 def generate_price(min_price=10.0, max_price=50.0):
     return round(fake.random.uniform(min_price, max_price), 2)
+
+medications = []
+for i in range(len(medication_names)):
+    name = medication_names[i]
+    description = medication_descriptions[i % len(medication_descriptions)]  # Use modulo to cycle through descriptions
+    quantity = fake.random_int(min=10, max=100)
+    price = generate_price()
+
+    medication = Medication(
+        name=name,
+        description=description,
+        quantity=quantity,
+        price=price
+    )
+    medications.append(medication)
+
+# Add all medications to the session
+session.add_all(medications)
+
+# Commit the changes to the database
+session.commit()
+
+print(f"Successfully created {len(medications)} medications!")
