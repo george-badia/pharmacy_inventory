@@ -39,3 +39,14 @@ def generate_random_date(start_date, end_date):
 
 
 import random
+
+# Seed 20 prescriptions 
+for _ in range(20):
+    # Get random customer and medication IDs 
+    customer_id = random.randint(1, 5)  
+    medication_id = random.randint(1, len(session.query(Medication).all()))  
+
+    # Generate a random quantity and date
+    quantity = random.randint(10, 30)  
+    date_issued = generate_random_date(from_date, to_date)
+
