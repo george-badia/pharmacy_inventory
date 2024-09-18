@@ -24,3 +24,10 @@ medication_descriptions = [
     "Treats acid reflux.",
     "Thyroid hormone replacement."
 ]
+
+# Medication names 
+medication_names = [
+    "Aspirin", "Ibuprofen", "Paracetamol", "Amoxicillin", "Metformin",
+    "Insulin", "Albuterol", "Salbutamol", "Prednisolone", "Levothyroxine",
+    "Simvastatin", "Atenolol", "Losartan", "Enalapril", "Amlodipine"
+]
