@@ -1,5 +1,9 @@
+
 import argparse
 import re
+from rich import print
+from rich.table import Table
+from rich.console import Console
 from sqlalchemy import Column, String, Integer, Float, ForeignKey, Date
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
@@ -8,14 +12,11 @@ from sqlalchemy import create_engine
 from datetime import datetime
 from sqlalchemy.orm import Session
 from models import Customer, Medication, Prescription, User, get_session
-import re
-from datetime import datetime
-from sqlalchemy.orm import Session
-from models import Customer, Medication, Prescription, User, get_session
 
 class Pharmacy:
     def __init__(self):
         self.session = next(get_session())
+        self.console = Console()
 
     def add_medication(self):
         name = input("Enter medication name: ")
@@ -61,8 +62,16 @@ class Pharmacy:
         if not medications:
             print("No medications available.")
         else:
+            table = Table(title="Medications")
+            table.add_column("ID", style="cyan")
+            table.add_column("Name", style="magenta")
+            table.add_column("Quantity", style="green")
+            table.add_column("Price", style="yellow")
+
             for med in medications:
-                print(f"ID: {med.id}, Name: {med.name}, Quantity: {med.quantity}, Price: ${med.price:.2f}")
+                table.add_row(str(med.id), med.name, str(med.quantity), f"${med.price:.2f}")
+
+            self.console.print(table)
 
     def add_customer(self):
         name = input("Enter customer name: ")
@@ -97,8 +106,16 @@ class Pharmacy:
         if not customers:
             print("No customers available.")
         else:
+            table = Table(title="Customers")
+            table.add_column("ID", style="cyan")
+            table.add_column("Name", style="magenta")
+            table.add_column("Phone", style="green")
+            table.add_column("Email", style="yellow")
+
             for customer in customers:
-                print(f"ID: {customer.id}, Name: {customer.name}, Phone: {customer.phone}, Email: {customer.email}")
+                table.add_row(str(customer.id), customer.name, customer.phone, customer.email)
+
+            self.console.print(table)
 
     def add_prescription(self):
         customer_id = input("Enter customer ID: ")
@@ -142,14 +159,27 @@ class Pharmacy:
         if not prescriptions:
             print("No sales data available.")
             return
+
+        table = Table(title="Sales Report")
+        table.add_column("Date", style="cyan")
+        table.add_column("Customer", style="magenta")
+        table.add_column("Medication", style="green")
+        table.add_column("Quantity", style="yellow")
+        table.add_column("Amount", style="red")
+
         total_sales = 0
-        print("Sales Report:")
         for prescription in prescriptions:
             sale_amount = prescription.medication.price * prescription.quantity
             total_sales += sale_amount
-            print(f"Date: {prescription.date_issued}, Customer: {prescription.customer.name}, "
-                  f"Medication: {prescription.medication.name}, Quantity: {prescription.quantity}, "
-                  f"Amount: ${sale_amount:.2f}")
+            table.add_row(
+                str(prescription.date_issued),
+                prescription.customer.name,
+                prescription.medication.name,
+                str(prescription.quantity),
+                f"${sale_amount:.2f}"
+            )
+
+        self.console.print(table)
         print(f"Total Sales: ${total_sales:.2f}")
 
 def main():
