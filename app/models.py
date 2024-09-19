@@ -56,9 +56,10 @@ class Medication(Base):
     description = Column(String, nullable=True)
     quantity = Column(Integer, nullable=False)
     price = Column(Float, nullable=False)
-
+    
    #Add relationship to medication
-    prescriptions = relationship('Prescription', back_populates='medication')
+    # prescriptions = relationship('Prescription', back_populates='medication')
+    prescriptions = relationship('Prescription', back_populates='medication', cascade="all, delete-orphan")
 
     def __repr__(self):
         return f"<Medication(name={self.name}, quantity={self.quantity}, price={self.price})>"
@@ -107,8 +108,8 @@ class Prescription(Base):
     
      #Add class methods to perform Crud functionality    
     @classmethod
-    def create(cls, session, customer_id, medication_id, quantity, date_issued):
-        new_prescription = cls(customer_id=customer_id, medication_id=medication_id, quantity=quantity, date_issued=date_issued)
+    def create(cls, session, customer_id, medication_id, quantity, date_issued, instruction):
+        new_prescription = cls(customer_id=customer_id, medication_id=medication_id, quantity=quantity, date_issued=date_issued, instruction=instruction)
         session.add(new_prescription)
         session.commit()
 
@@ -143,12 +144,7 @@ class User(Base):
     def hash_password(password):
         return hashlib.sha256(password.encode()).hexdigest()
 
-    @classmethod
-    def create(cls, session, username, password):
-        hashed_password = cls.hash_password(password)
-        new_user = cls(username=username, password=hashed_password)
-        session.add(new_user)
-        session.commit()
+
 
     @classmethod
     def authenticate(cls, session, username, password):
@@ -165,6 +161,12 @@ Base.metadata.create_all(engine)
 
 # Create a session factory bound to the engine
 Session = sessionmaker(bind=engine)
-session = Session()
+def get_session():
+    """Yield a new database session."""
+    session = Session()
+    try:
+        yield session
+    finally:
+        session.close()
 
              
