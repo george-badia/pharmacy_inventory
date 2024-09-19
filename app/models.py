@@ -23,7 +23,8 @@ class Customer(Base):
 
     def __repr__(self):
         return f"<Customer:(name={self.name}, phone={self.phone}, email={self.email})>"
-        
+
+
     # Add class methods for CRUD functionality
     @classmethod
     def create(cls, session, name, phone, email):
@@ -137,6 +138,24 @@ class User(Base):
 
     def __repr__(self):
         return f"<User:(username={self.username}, password={self.password})>"
+    
+    @staticmethod
+    def hash_password(password):
+        return hashlib.sha256(password.encode()).hexdigest()
+
+    @classmethod
+    def create(cls, session, username, password):
+        hashed_password = cls.hash_password(password)
+        new_user = cls(username=username, password=hashed_password)
+        session.add(new_user)
+        session.commit()
+
+    @classmethod
+    def authenticate(cls, session, username, password):
+        user = session.query(cls).filter_by(username=username).first()
+        if user and cls.hash_password(password) == user.password:
+            return True
+        return False
 
 # Create an SQLite database engine
 engine = create_engine('sqlite:///app/pharmacy.db')
