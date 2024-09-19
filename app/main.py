@@ -186,16 +186,7 @@ def main():
     pharmacy = Pharmacy()
     while True:
         print("\n=== Pharmacy Management System ===")
-        print("1. Add Medication")
-        print("2. Delete Medication")
-        print("3. Display All Medications")
-        print("4. Add Customer")
-        print("5. Delete Customer")
-        print("6. Display All Customers")
-        print("7. Add Prescription")
-        print("8. Delete Prescription")
-        print("9. Generate Sales Report")
-        print("10. Exit")
+
         print('---------------------------------------------')
         print("|Enter 1 to Add Medication                  |")
         print('---------------------------------------------')
