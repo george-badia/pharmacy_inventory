@@ -1,5 +1,3 @@
-Here's a README for your **Pharmacy Inventory System Management** project, modeled on the Coffee Shop Domain example:
-
 # Pharmacy Inventory System Management
 
 Welcome to the **Pharmacy Inventory System Management** project! This Python project utilizes Object-Oriented Programming (OOP) and SQLAlchemy to manage the operations of a pharmacy, focusing on customers, medications, and prescriptions.
@@ -58,17 +56,20 @@ The **Pharmacy Inventory System Management** project models a system that tracks
 1. Ensure Python 3.x is installed on your machine.
 
 2. Set Up the Virtual Environment: This project uses `pipenv` for managing dependencies:
+
    ```bash
    $ pipenv install
    $ pipenv shell
    ```
 
 3. Run database migrations with Alembic:
+
    ```bash
    $ alembic upgrade head
    ```
 
 4. Run the test cases for validation:
+
    ```bash
    $ pytest
    ```
