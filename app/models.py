@@ -23,6 +23,28 @@ class Customer(Base):
 
     def __repr__(self):
         return f"<Customer:(name={self.name}, phone={self.phone}, email={self.email})>"
+        
+    # Add class methods for CRUD functionality
+    @classmethod
+    def create(cls, session, name, phone, email):
+        new_customer = cls(name=name, phone=phone, email=email)
+        session.add(new_customer)
+        session.commit()
+
+    @classmethod
+    def delete(cls, session, customer_id):
+        customer = session.query(cls).get(customer_id)
+        if customer:
+            session.delete(customer)
+            session.commit()
+
+    @classmethod
+    def get_all(cls, session):
+        return session.query(cls).all()
+
+    @classmethod
+    def find_by_id(cls, session, customer_id):
+        return session.query(cls).get(customer_id)
 
 #  Medication Model
 class Medication(Base):
