@@ -30,27 +30,27 @@ The **Pharmacy Inventory System Management** project models a system that tracks
 
 ## Further Explanations:
 
-- add_medication: Adds a new medication to the inventory. Prompts the user for details and performs input validation for price and quantity.
+- **add_medication:** Adds a new medication to the inventory. Prompts the user for details and performs input validation for price and quantity.
 
-- delete_medication: Deletes a medication by ID after validating the input.
+- **delete_medication:** Deletes a medication by ID after validating the input.
 
-- display_medications: Fetches all medications and displays them in a table format.
+- **display_medications:** Fetches all medications and displays them in a table format.
 
-- add_customer: Adds a new customer, validating the phone number for the correct format.
+- **add_customer:** Adds a new customer, validating the phone number for the correct format.
 
-- delete_customer: Deletes a customer by their ID after validation.
+- **delete_customer:** Deletes a customer by their ID after validation.
 
-- display_customers: Displays a table of all customers with their details.
+- **display_customers:** Displays a table of all customers with their details.
 
-- add_prescription: Adds a new prescription for a customer with input validation for quantity and IDs.
+- **add_prescription:** Adds a new prescription for a customer with input validation for quantity and IDs.
 
-- delete_prescription: Deletes a prescription by its ID.
+- **delete_prescription:** Deletes a prescription by its ID.
 
-- display_prescriptions: Fetches all prescriptions and displays them in a detailed table.
+- **display_prescriptions:** Fetches all prescriptions and displays them in a detailed table.
 
-- generate_sales_report: Calculates and displays a sales report based on prescriptions.
+- **generate_sales_report:** Calculates and displays a sales report based on prescriptions.
 
-- run: Main loop for the CLI menu, handling user input and invoking the corresponding methods.
+- **run:** Main loop for the CLI menu, handling user input and invoking the corresponding methods.
 
 ## Setup/Installation Requirements
 
