@@ -218,28 +218,29 @@ def main():
         print("\n=== Pharmacy Management System ===")
 
         print('---------------------------------------------')
-        print("|Enter 1 to Add Medication                  |")
+        print("|Enter 1 to  Add Medication                 |")
         print('---------------------------------------------')
-        print('|Enter 2 to Delete Medication               |')
+        print('|Enter 2 to  Delete Medication              |')
         print('---------------------------------------------')
-        print('|Enter 3 to Display All Medications         |')
+        print('|Enter 3 to  Display All Medications        |')
         print('---------------------------------------------')
-        print('|Enter 4 to Add Customer                    |')
+        print('|Enter 4 to  Add Customer                   |')
         print('---------------------------------------------')
-        print("|Enter 5 to Delete Customer                 |")
+        print("|Enter 5 to  Delete Customer                |")
         print('---------------------------------------------')
-        print('|Enter 6 to Display All Customers           |')
+        print('|Enter 6 to  Display All Customers          |')
         print('---------------------------------------------')
-        print('|Enter 7 to Add Prescription                |')
+        print('|Enter 7 to  Add Prescription               |')
         print('---------------------------------------------')
         print('|Enter 8 to  Delete Prescription            |')
         print('---------------------------------------------')
-        print("|Enter 9 to Generate Sales Report           |")
+        print("|Enter 9 to  Display AllPrescriptions       |")
         print('---------------------------------------------')
-        print('|Enter 10 to Display AllPrescriptions       |')
+        print('|Enter 10 to Generate Sales Report          |')
         print('---------------------------------------------')
         print('|Enter 11 to Exit                           |')
         print('---------------------------------------------')
+        
 
 
         choice = input("Enter your choice (1-11): ")
@@ -261,10 +262,9 @@ def main():
         elif choice == '8':
             pharmacy.delete_prescription()
         elif choice == '9':
-            pharmacy.generate_sales_report()
-        elif choice == '10':
             pharmacy.display_prescriptions()
-
+        elif choice == '10':
+            pharmacy.generate_sales_report()
         elif choice == '11':
             print("Thank you for using the Pharmacy Management System. Goodbye!")
             break
