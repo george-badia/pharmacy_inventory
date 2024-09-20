@@ -154,6 +154,36 @@ class Pharmacy:
             self.session.rollback()
             print(f"Failed to delete prescription with ID {prescription_id}.")
 
+    def display_prescriptions(self):
+        prescriptions = Prescription.get_all(self.session)
+        if not prescriptions:
+            print("No prescriptions available.")
+        else:
+            table = Table(title="Prescriptions")
+            table.add_column("ID", style="cyan")
+            table.add_column("Customer", style="magenta")
+            table.add_column("Medication", style="green")
+            table.add_column("Quantity", style="yellow")
+            table.add_column("Date Issued", style="blue")
+            table.add_column("Instructions", style="red")
+
+            for prescription in prescriptions:
+                # Check if customer and medication are not None
+                customer_name = prescription.customer.name if prescription.customer else "Unknown Customer"
+                medication_name = prescription.medication.name if prescription.medication else "Unknown Medication"
+
+                table.add_row(
+                    str(prescription.id),
+                    customer_name,
+                    medication_name,
+                    str(prescription.quantity),
+                    str(prescription.date_issued),
+                    prescription.instruction
+                )
+
+            self.console.print(table)
+
+
     def generate_sales_report(self):
         prescriptions = Prescription.get_all(self.session)
         if not prescriptions:
@@ -206,11 +236,13 @@ def main():
         print('---------------------------------------------')
         print("|Enter 9 to Generate Sales Report           |")
         print('---------------------------------------------')
-        print('|Enter 10 to Exit                           |')
+        print('|Enter 10 to Display AllPrescriptions       |')
+        print('---------------------------------------------')
+        print('|Enter 11 to Exit                           |')
         print('---------------------------------------------')
 
 
-        choice = input("Enter your choice (1-10): ")
+        choice = input("Enter your choice (1-11): ")
 
         if choice == '1':
             pharmacy.add_medication()
@@ -231,10 +263,13 @@ def main():
         elif choice == '9':
             pharmacy.generate_sales_report()
         elif choice == '10':
+            pharmacy.display_prescriptions()
+
+        elif choice == '11':
             print("Thank you for using the Pharmacy Management System. Goodbye!")
             break
         else:
-            print("Invalid choice. Please enter a number between 1 and 10.")
+            print("Invalid choice. Please enter a number between 1 and 11.")
 
 if __name__ == "__main__":
     main()
