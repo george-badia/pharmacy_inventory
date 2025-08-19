@@ -6,6 +6,24 @@ Welcome to the **Pharmacy Inventory System Management** project! This Python pro
 
 This project is the sole property of George Badia.
 
+## Screenshots
+
+### Menu
+
+![Menu Screenshot](images/menu.png)
+
+### Customers
+
+![Customers Screenshot](images/customers.png)
+
+### Medications
+
+![Medications Screenshot](images/medications.png)
+
+### Prescription
+
+![prescription Screenshot](images/prescription.png)
+
 ## Project Overview
 
 The **Pharmacy Inventory System Management** project models a system that tracks medications, customer details, and prescriptions using three core classes:
